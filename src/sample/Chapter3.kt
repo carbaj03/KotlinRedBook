@@ -1,5 +1,8 @@
 package sample
 
+import chapter3.Cons
+import chapter3.Nil
+
 sealed class ListK<out A> {
 
     companion object {
@@ -189,7 +192,6 @@ sealed class ListK<out A> {
     }
 
     object Nil : ListK<Nothing>()
-
     data class Cons<out A>(val head: A, val tail: ListK<A>) : ListK<A>()
 }
 
@@ -250,6 +252,7 @@ fun main(args: Array<String>) {
         else -> 101
     }
 
+    val ex2: chapter3.ListK<Int> = Cons(1, Nil)
 
     println(ListK.sum(ListK.apply((1..2).toList())))
     println(ListK.product(ListK.apply(listOf(100.1, 20.2))))

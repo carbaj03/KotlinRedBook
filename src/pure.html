@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+La programación funcional se basa en funciones puras y esto significa que las funciones no tienen <em>Side Effects</em>.
+Una función <code>f</code> con una entrada del tipo <code>A</code> y una salida tipo <code>B</code>, es un cálculo que relaciona cada valor a del tipo A con un valor b de tipo <code>B</code>, tal que <code>b</code> está determinado solamente por el valor de <code>a</code>. Cualquier cambio en el estado interno o externo es irrelevante para el cálculo de <code>f(a)</code>.
+
+En otras palabras, el único efecto observable en la ejecución del programa es el cálculo resultado de sus entradas. A partir de ahora para referirnos a "funciones puras" las llamaremos "funciones" sin más. Si quisiéramos referirnos a funciones con side effects podrías utilizar "procedimiento".
+Un ejemplo muy simple de función es la suma (+) de Int, donde dados dos Int siempre devolveremos el mismo valor de Int.
+<h2>Referencia transparencial</h2>
+Una propiedad de las expresiones (ej: 2 + 1) es la referencia transparencial(RT), donde aplicaremos la función pura <code>+</code> a los valores <code>2</code> y <code>1</code>, esto da como resultado el valor <code>5</code>, si nosotros sustituimos la expresión <code>2 + 1</code> en todas las ocurrencias de nuestro programa, no cambiará el comportamiento del mismo.
+
+Aquí os muestro un ejemplo donde las expresiones son RT:
+<pre>val x : String = "hola"
+val r1: String = x.reversed() //aloh
+val r2: String = x.reversed() //aloh
+&lt;--------------------------------&gt;
+val r1: String = "hola".reversed() //aloh
+val r2: String = "hola".reversed() //aloh
+</pre>
+Como puedes observar al sustituir todas las ocurrencias de x por su valor no afecta al resultado del programa.
+Veamos el siguiente ejemplo:
+<pre>val x = StringBuilder("Hola")
+val y = x.append(", Mundo")
+val r1 = y.toString() //Hola, Mundo
+val r2 = y.toString() //Hola, Mundo
+
+val x = StringBuilder("Hola")
+val r1 = x.append(", Mundo").toString() //Hola, Mundo
+val r2 = x.append(", Mundo").toString() //Hola, Mundo, Mundo
+</pre>
+Como podemos observar la función <code>append</code> no es pura, carece de <em>RT</em> puesto que al sustituir todas las ocurrencias de y en el programa por la expresión <code>x.append(", Mundo")</code> produce un resultado distinto al primer programa. Esto sucede debido a los <em>side effects</em>, como puedes ver esto hace que entender el comportamiento del programa sea más difícil.
+
+Esta pureza en las funciones nos ofrece programas más modulares, una función pura es modular y componible porque separa la lógica de la propia computación de "qué hacer con el resultado" y "cómo obtener la entrada"; es una caja negra.
+</body>
+</html>

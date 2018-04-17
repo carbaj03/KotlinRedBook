@@ -128,8 +128,3 @@ fun main(args: Array<String>) {
     print("\nboth: ${double()}")
     print("\nnonNegativeInt: ${nonNegativeLessThan(3)}")
 }
-
-
-data class State<S, out A>(run: (S) -> Pair<A, S>) {
-
-}

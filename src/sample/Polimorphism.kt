@@ -25,17 +25,18 @@ fun <A> isSorted(ars: Array<A>, ordered: (A, A) -> Boolean): Boolean {
 }
 
 fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C =
-        { b -> f(a, b) }
+        { b: B -> f(a, b) }
 
 fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C =
         { a: A -> { b: B -> f(a, b) } }
 
-fun <A, B, C> uncurry(f: (A) -> ((B) -> C)): (A, B) -> C =
+fun <A, B, C> uncurry(f: (A) -> (B) -> C): (A, B) -> C =
         { a: A, b: B -> f(a)(b) }
 
 fun <A, B, C> composition(f: (B) -> C, g: (A) -> B): (A) -> C =
         { a: A -> f(g(a)) }
 
 fun main(args: Array<String>) {
+    println(findFirst(arrayOf(7, 9, 13), { x: Int -> x == 9 }))
     println(isSorted(arrayOf(1, 2, 3, 1), { x, y -> x > y }))
 }
